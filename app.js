@@ -33,11 +33,11 @@ rl.on('close', () => {
     value.change = value.popu15 / value.popu10;
   }
   const rankingArray = Array.from(prefectureDataMap).sort((pair1, pair2) => {
-    // return pair2[1].change - pair1[1].change;
+    // return pair2[1].change - pair1[1].change;  //こっちはベストのランキング
     return pair1[1].change - pair2[1].change;
   });
-  const rankingStrings = rankingArray.map(([key, value], i) => {
+  const rankingStrings = rankingArray.map(([key, value], i) => {  // [key, value]は配列なので間違えて中に i を置かない様に注意。
     return '変化率ワースト' + (i + 1) + '位 ' + key + ': ' + value.popu10 + ' => ' + value.popu15 + ' 変化率:' + Math.ceil(value.change * 100) + '%';
-  });
+  });   // mapのカウント i はゼロから始まるのでランキングにする場合は最初に1を足しておく。Math.ceilで小数点を丸める。
   console.log(rankingStrings);
 });
